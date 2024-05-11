@@ -30,4 +30,9 @@ Route::get('/Proyectos/{proyectos}/edit', [ProyectoController::class, 'edit'])->
 Route::get('/Paquetes', [PaqueteController::class, 'index'])->name('paquetes.index');
 Route::post('/Paquetes', [PaqueteController::class, 'store'])->name('paquetes.store');
 Route::get('/Paquetes/create', [PaqueteController::class, 'create'])->name('paquetes.create');
+Route::delete('/Paquetes/{paquetes}', [PaqueteController::class, 'destroy'])->name('paquetes.destroy');
+Route::put('/Paquetes/{paquete}', [PaqueteController::class, 'update'])->name('paquetes.update');
+
+Route::get('/Paquetes/{paquetes}/edit', [PaqueteController::class, 'edit'])->name('paquetes.edit');
+
 require __DIR__.'/auth.php';

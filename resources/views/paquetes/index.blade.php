@@ -52,8 +52,14 @@
                             <td>{{ $paquete->tipo }}</td>
                             <td>{{ $paquete->estado }}</td>
                             <td>
-                                <span>Actions</span>
-                                {{-- Aquí puedes incluir los botones de editar y eliminar --}}
+                                <a href="{{ route('paquetes.edit', ['paquetes' => $paquete->id]) }}" class="btn btn-secondary">Editar</a>
+
+                                <form action="{{ route('paquetes.destroy', $paquete->id) }}" method="POST" style="display: inline;">
+                                    @csrf
+                                    @method('DELETE')
+                                    <input type="hidden" name="Idproyecto" value="{{ $paquete->Idproyecto }}">
+                                    <button type="submit" class="btn btn-danger" onclick="return confirm('¿Estás seguro de que deseas eliminar esta tarea?')">Eliminar</button>
+                                </form>
                             </td>
                         </tr>
                     @endforeach

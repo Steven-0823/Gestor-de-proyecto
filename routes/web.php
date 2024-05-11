@@ -28,4 +28,6 @@ Route::get('/Proyectos/{proyectos}/edit', [ProyectoController::class, 'edit'])->
 
 
 Route::get('/Paquetes', [PaqueteController::class, 'index'])->name('paquetes.index');
+Route::post('/Paquetes', [PaqueteController::class, 'store'])->name('paquetes.store');
+Route::get('/Paquetes/create', [PaqueteController::class, 'create'])->name('paquetes.create');
 require __DIR__.'/auth.php';

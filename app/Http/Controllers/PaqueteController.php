@@ -31,16 +31,44 @@ class PaqueteController extends Controller
      */
     public function create()
     {
-        //
+        $users = DB::table('users')
+        ->orderBy('name')
+        ->get();
+
+        $proyectos = DB::table('_proyectos')
+        ->orderBy('nombre')
+        ->get();
+
+        return view('paquetes.new', ['users' => $users, 'proyectos' => $proyectos]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-        //
-    }
+{
+    // Validación y almacenamiento de otros campos del paquete
+
+    $paquete = new Paquete();
+    $paquete->titulo = $request->titulo;
+    $paquete->IdEncargado = $request->IdLider;
+    $paquete->Idproyecto = $request->Idproyecto; // Corregir aquí
+    $paquete->descripcion = $request->descripcion;
+    $paquete->estado = $request->estado;
+    $paquete->tipo = $request->tipo;
+    $paquete->save();
+
+    // Obtener las paquetes del proyecto y devolver al índice de paquetes
+    $paquetes = DB::table('_paquetes')
+        ->join('users', '_paquetes.IdEncargado', '=', 'users.id')
+        ->join('_proyectos', '_paquetes.Idproyecto', '=', '_proyectos.id')
+        ->where('_paquetes.Idproyecto', '=', $request->Idproyecto) // Corregir aquí
+        ->select('_paquetes.*', 'users.name as nombre_user', '_proyectos.Nombre as nombre_proyecto')
+        ->get();
+
+    return view('paquetes.index', ['paquetes' => $paquetes]);
+}
+
 
     /**
      * Display the specified resource.

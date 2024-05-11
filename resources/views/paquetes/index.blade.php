@@ -7,7 +7,7 @@
             </div>
         @endif
 
-        <a href="{{ route('paquetes.index') }}" class="btn btn-dark" style="margin-bottom: 1%">Nuevo paquete de trabajo</a>
+        <a href="{{ route('paquetes.create') }}" class="btn btn-dark" style="margin-bottom: 1%">Nuevo paquete de trabajo</a>
 
         <!-- Controles de filtro -->
         <div class="mb-3">

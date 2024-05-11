@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProyectoController;
+use App\Http\Controllers\PaqueteController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -24,4 +25,7 @@ Route::get('/Proyectos/create', [ProyectoController::class, 'create'])->name('pr
 Route::delete('/Proyectos/{proyectos}', [ProyectoController::class, 'destroy'])->name('proyectos.destroy');
 Route::put('/Proyectos/{proyecto}', [ProyectoController::class, 'update'])->name('proyectos.update');
 Route::get('/Proyectos/{proyectos}/edit', [ProyectoController::class, 'edit'])->name('proyectos.edit');
+
+
+Route::get('/Paquetes', [PaqueteController::class, 'index'])->name('paquetes.index');
 require __DIR__.'/auth.php';

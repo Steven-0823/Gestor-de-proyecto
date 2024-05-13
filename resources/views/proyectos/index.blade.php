@@ -12,13 +12,13 @@
   </head>
   <body>
     {{-- <div class = "container"> --}}
-    <h1>Proyectos Creados</h1>
+    <h1 class="text-center">Proyectos Creados</h1>
     <a href="{{ route('proyectos.create') }}" class="btn btn-dark" style="margin-bottom: 1%">Nuevo Proyecto</a>
     <table class="table">
         <thead>
           <tr>
             <th scope="col">Id</th>
-            <th scope="col">Nombre</th>
+            <th scope="col">Proyecto</th>
             <th scope="col">Encargado</th>
             <th scope="col">Presupuesto</th>
             <th scope="col">Presupuesto Usado</th>
@@ -51,9 +51,6 @@
                             <td>${{ $proyecto->PorcentajeAvance }}%</td>
                         @endif
                         <td>
-                            {{-- <a href="{{ route('tareas.index', ['proyecto_id' => $proyecto->id]) }}" class="btn btn-primary">Ver Tareas</a> --}}
-
-                            
                             <a href="{{ route('proyectos.edit', ['proyectos' => $proyecto->id]) }}" class="btn btn-secondary">Editar</a>
 
                                 <form action="{{ route('proyectos.destroy', ['proyectos' => $proyecto->id]) }}" method="POST" style="display:inline-block">

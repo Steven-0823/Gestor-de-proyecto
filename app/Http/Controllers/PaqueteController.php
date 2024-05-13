@@ -17,21 +17,13 @@ class PaqueteController extends Controller
     $proyecto_id = $request->input('proyecto_id');
 
     // Si no se proporciona ningún valor, establecer un valor predeterminado para mostrar todos los paquetes
-    if (empty($proyecto_id)) {
+    
         $paquetes = DB::table('_paquetes')
             ->join('users', '_paquetes.IdEncargado', '=', 'users.id')
             ->join('_proyectos', '_paquetes.Idproyecto', '=', '_proyectos.id')
             ->select('_paquetes.*', 'users.name as nombre_user', '_proyectos.Nombre as nombre_proyecto')
             ->get();
-    } else {
-        // Si se proporciona un valor, filtrar los paquetes por proyecto
-        $paquetes = DB::table('_paquetes')
-            ->join('users', '_paquetes.IdEncargado', '=', 'users.id')
-            ->join('_proyectos', '_paquetes.Idproyecto', '=', '_proyectos.id')
-            ->where('_paquetes.Idproyecto', '=', $proyecto_id)
-            ->select('_paquetes.*', 'users.name as nombre_user', '_proyectos.Nombre as nombre_proyecto')
-            ->get();
-    }
+   
 
     return view('paquetes.index', ['paquetes' => $paquetes]);
 }
@@ -70,16 +62,9 @@ class PaqueteController extends Controller
     $paquete->tipo = $request->tipo;
     $paquete->save();
 
-    // Obtener las paquetes del proyecto y devolver al índice de paquetes
-    $paquetes = DB::table('_paquetes')
-        ->join('users', '_paquetes.IdEncargado', '=', 'users.id')
-        ->join('_proyectos', '_paquetes.Idproyecto', '=', '_proyectos.id')
-        ->where('_paquetes.Idproyecto', '=', $request->Idproyecto) // Corregir aquí
-        ->select('_paquetes.*', 'users.name as nombre_user', '_proyectos.Nombre as nombre_proyecto')
-        ->get();
-
-    return view('paquetes.index', ['paquetes' => $paquetes]);
+    return redirect()->route('paquetes.index'); // Redirige al índice de paquetes después de guardar el nuevo paquete
 }
+
 
 
     /**
